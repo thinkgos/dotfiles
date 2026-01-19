@@ -1,0 +1,9 @@
+[tasks.apply-dotfiles]
+run = '''
+mise activate nu > dot_config/nushell/completions/_mise.nu
+zoxide init nushell > dot_config/nushell/completions/_zoxide.nu
+atuin init nu > dot_config/nushell/completions/_atuin.nu
+starship init nu > dot_config/nushell/completions/_starship.nu
+carapace _carapace nushell > dot_config/nushell/completions/_carapace.nu
+chezmoi apply
+'''
