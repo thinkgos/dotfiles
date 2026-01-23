@@ -1,9 +1,13 @@
 [tools]
-chezmoi = "2.69.3"
 carapace = "1.5"
 atuin = "18.11.0"
 zoxide = "0.9.8"
 starship = "1.24.2"
+
+[tools."github:twpayne/chezmoi"]
+version = "2.69.3"
+[tools."github:twpayne/chezmoi".platforms]
+linux-x64 = { asset_pattern = "chezmoi_{version}_linux-musl_amd64.tar.gz" }
 
 [tasks.apply-dotfiles]
 run = '''
