@@ -1,0 +1,22 @@
+export BAT_PAGER="less -r"
+export EDITOR="vim"
+export FZF_ALT_C_OPTS="--walker-skip .git,node_modules,target --preview 'tree -C -L 3 {}'"
+export FZF_DEFAULT_COMMAND="fd --hidden"
+
+export ZDOTDIR="$HOME/.config/zsh"
+
+# Make system functions available to zsh
+() {
+  setopt LOCAL_OPTIONS CASE_GLOB EXTENDED_GLOB
+
+  local system_fpaths=(
+      # Package default
+      /usr/share/zsh/site-functions(/-N)
+
+      # Debian
+      /usr/share/zsh/functions/**/*(/-N)
+      /usr/share/zsh/vendor-completions/(/-N)
+      /usr/share/zsh/vendor-functions/(/-N)
+  )
+  fpath=(${fpath} ${system_fpaths})
+}
