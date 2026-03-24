@@ -1,0 +1,2 @@
+[cors]
+cors.thinkgos.cn ansible_user=cors

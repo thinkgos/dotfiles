@@ -1,0 +1,27 @@
+# ansible-playbook playbook.yml
+- name: 通用服务端管理
+  hosts: cors.thinkgos.cn
+  become: true
+  vars:
+    required_packages:
+      - curl
+      - zip
+      - unzip
+      - tar
+      - zsh
+      - tmux
+
+  tasks:
+    - name: Ping
+      ansible.builtin.ping:
+
+    - name: 更新 apt 缓存
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: 安装系统包
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ required_packages }}"
