@@ -1,5 +1,7 @@
 README.md
 ISSUE.md
+AGENTS.md
+CLAUDE.md
 assets
 ansible.cfg
 hosts
