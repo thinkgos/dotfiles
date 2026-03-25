@@ -27,7 +27,42 @@
 
 ## 常用工作流
 
-### 运行 Ansible 剧本(可选)
+### 首次部署（从零开始）
+
+```bash
+# 1. 安装基础依赖（见前置条件表格）
+
+# 2. 克隆仓库到 chezmoi 目录
+git clone https://github.com/thinkgos/dotfiles.git ~/.local/share/chezmoi
+
+# 3. 进入仓库目录
+cd ~/.local/share/chezmoi
+
+# 4. 应用配置（chezmoi 会将配置文件链接到 $HOME）
+chezmoi apply -S .
+
+# 或通过 mise 任务
+mise run apply-dotfiles
+```
+
+### 更新与维护
+
+```bash
+# 拉取仓库最新变更
+git pull origin main
+
+# 重新应用配置
+chezmoi apply -S .
+
+# 查看变更（应用前先预览）
+chezmoi diff
+
+# 编辑特定配置
+chezmoi edit .zshrc  # 编辑 zsh 配置
+chezmoi edit .vimrc  # 编辑 vim 配置
+```
+
+### 运行 Ansible 剧本（可选）
 
 主要管理远程服务器系统软件和基本配置
 
@@ -35,28 +70,34 @@
 ansible-playbook playbook.yml
 ```
 
-**注意**: 在 Ubuntu 25.10+ 上，由于 `sudo-rs` 不兼容性，Ansible 的 sudo 任务可能失败. 参见 ISSUE.md 了解解决方案.
+> ⚠️ **注意**: 在 Ubuntu 25.10+ 上，由于 `sudo-rs` 不兼容性，Ansible 的 sudo 任务可能失败。详见 [ISSUE.md](ISSUE.md) 解决方案。
 
-### 应用 dotfiles
-
-```bash
-chezmoi apply -S .
-# 或通过 mise 任务：
-mise run apply-dotfiles
-```
-
-### 更新/提升工具版本
+### 工具链版本管理
 
 ```bash
+# 升级所有工具到最新版本
 mise upgrade --bump --cd dot_config/mise/conf.d
-# 或通过 mise 任务：
+# 或通过 mise 任务
 mise run bump-tools
+
+# 查看当前安装的工具版本
+mise ls
+
+# 查看特定工具的版本
+mise ls -f zsh
 ```
 
-### 设置 starship 提示符
+### 配置管理
 
 ```bash
+# 设置 starship 提示符
 mise run use-starship
+
+# 更新后重新加载 zsh 配置
+source ~/.zshrc
+
+# 验证 direnv 集成（在项目目录中会有自动加载）
+direnv allow
 ```
 
 ## 架构与结构
