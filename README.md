@@ -46,8 +46,12 @@ ansible playbook 标签:
 # 本地机器
 ansible-playbook site.yml -u <username> --tags system,github -K
 
-# 远程机器
+# 远程机器(新机器)
 chezmoi init --apply thinkgos
+
+# 远程机器(已有配置机器)
+chezmoi git pull
+chezmoi apply
 ```
 
 ### 设置默认shell为zsh
