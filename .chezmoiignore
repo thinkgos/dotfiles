@@ -8,3 +8,4 @@ roles/**
 ansible.cfg
 hosts
 site.yml
+renovate.json
