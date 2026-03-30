@@ -3,6 +3,8 @@ ISSUE.md
 AGENTS.md
 CLAUDE.md
 assets
+minimal/**
+roles/**
 ansible.cfg
 hosts
-playbook.yml
+site.yml
