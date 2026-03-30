@@ -6,7 +6,7 @@ run = "chezmoi apply -S ."
 
 [tasks.apply-minimal-dotfiles]
 run = """
-cp -r minimal/ dot_config/mise/conf.d/
+cp -r minimal/* dot_config/mise/conf.d/
 chezmoi apply -S .
 rm -r dot_config/mise/conf.d/*
 """
