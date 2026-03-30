@@ -4,47 +4,19 @@
 
 这是一个使用 [chezmoi](https://www.chezmoi.io/) 管理的**个人 dotfiles 仓库**。配置是版本控制和可复现的。项目使用 [mise](https://mise.jdx.dev/) 作为版本管理器来锁定工具版本。
 
-**目标位置**: `$HOME` (chezmoi 的目标位置)
-
-## 核心概念
-
-- **源文件 vs 目标文件**: chezmoi 源文件位于此仓库中。运行 `chezmoi apply` 时，文件会被链接/模板化到 `$HOME`。
-- **文件命名**: dotfiles 使用 `dot_` 前缀（例如 `dot_zshrc` → `~/.zshrc`）。
-- **模板变量**: `{{ .chezmoi.version }}`, `{{ .Env.HOME }}` 等。重构时移除不必要的模板。
-- **版本管理**: 所有 CLI 工具的版本都固定在 `dot_config/mise/conf.d/mise.toml` 中。
-
-## 仓库结构
-
-```sh
-.
-├── dot_zshrc              # Zsh 配置（插件、别名、初始化）
-├── dot_zshenv             # Zsh 环境变量和 fpath
-├── dot_vimrc              # Vim 配置
-├── .mise.toml             # Mise 工具版本 + 自定义任务
-├── playbook.yml           # Ansible 剧本（远程服务器）
-├── ansible.cfg            # Ansible 配置
-├── hosts                  # Ansible 清单
-├── ISSUE.md               # 已知问题
-├── README.md              # 面向用户的文档
-└── dot_config/
-    ├── starship.toml      # Starship 提示符配置
-    ├── mise/conf.d/mise.toml  # 工具版本
-    └── zellij/zellij.kdl  # Zellij 布局
-```
-
 ## 项目工作指引
 
 ### 修改配置文件
 
-1. **直接编辑**此仓库中的源文件（chezmoi source）。
+1. **直接编辑**此仓库中的源文件。
 2. 更改后，运行 `chezmoi apply -S .` 同步到 `$HOME`。
 3. 应用前使用 `chezmoi diff` 预览更改。
 4. 使用 `chezmoi edit <target>` 编辑 `$HOME` 中的文件，更改会自动同步回仓库。
 
 ### 更新工具版本
 
-- 编辑 `dot_config/mise/conf.d/mise.toml` 来提升版本。
-- 运行 `mise upgrade --bump --cd dot_config/mise/conf.d` 或 `mise run bump-tools`。
+- 编辑 `minimal/mise.toml` 来提升版本。
+- 运行 `mise upgrade --bump --cd minimal` 或 `mise run bump-mise-tools`。
 
 ### 测试更改
 
@@ -59,10 +31,11 @@
 ```bash
 chezmoi apply -S .              # 应用配置
 chezmoi diff                    # 预览更改
-chezmoi edit .zshrc             # 编辑目标并同步回
-mise run apply-dotfiles         # 通过 mise 任务应用
+chezmoi edit .zshrc             # 编辑目标
+mise run apply-dotfiles         # 通过 mise 任务应用full模式配置
+mise run apply-minimal-dotfiles # 通过 mise 任务应用minimal模式配置
 mise run use-starship           # 设置 starship 配置
-ansible-playbook playbook.yml  # 配置远程服务器（可选）
+ansible-playbook site.yml -u <username> --tags system,github -K # 配置远程服务器（full模型）
 ```
 
 ## 代码风格与约定
@@ -75,9 +48,7 @@ ansible-playbook playbook.yml  # 配置远程服务器（可选）
 ## 特别注意事项
 
 - **Ubuntu 25.10+ 兼容性**: Ansible sudo 任务可能因 `sudo-rs` 不兼容而失败。见 ISSUE.md。
-- **Kitty/Ghostty TERM 修复**: 已在 `dot_zshrc` 中通过 TERM 检测处理。
 - **自定义主题**: `assets/starship/` 中的 starship 主题可以复制到 `dot_config/starship.toml`。
-- **Yazi 集成**: `yy()` 函数启动 yazi，退出后自动 `cd`。
 
 ## 提交指南
 
