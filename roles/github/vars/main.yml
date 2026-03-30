@@ -4,12 +4,12 @@ github_apps:
   #   description: ""
   #   repo: "owner/repo"
   #   version: 0.1.x
-  #   tag_v: true
+  #   tag_prefix: "v" # 可选, 默认为"v"
   #   package_name: "example"
   #   debian_pattern: "__VERSION__.deb"
   #   redhat_pattern: "__VERSION__.rpm"
   #   binary_name: ""
-  #   version_arg: "--version"
+  #   version_arg: "--version" # 可选, 默认为"--version"
   #   binaries: []
   #   binary_pattern: ""
 
@@ -17,7 +17,6 @@ github_apps:
     description: "Manage your dotfiles across multiple diverse machines, securely."
     repo: "twpayne/chezmoi"
     version: 2.70.0
-    tag_v: true
     binary_name: "chezmoi"
     binary_pattern: "chezmoi___VERSION___linux-musl_amd64.tar.gz"
 
@@ -25,7 +24,6 @@ github_apps:
     description: "dev tools, env vars, task runner"
     repo: "jdx/mise"
     version: 2026.3.17
-    tag_v: true
     binary_name: "mise"
     binary_pattern: "mise-v__VERSION__-linux-x64-musl.tar.xz"
 
@@ -33,7 +31,6 @@ github_apps:
     description: "A multi-shell completion binary"
     repo: "carapace-sh/carapace-bin"
     version: 1.6.4
-    tag_v: true
     binary_name: "carapace"
     binary_pattern: "carapace-bin___VERSION___linux_amd64.tar.gz"
 
@@ -41,7 +38,6 @@ github_apps:
     description: "✨ Making your shell magical"
     repo: "atuinsh/atuin"
     version: 18.13.6
-    tag_v: true
     binary_name: "atuin"
     binary_pattern: "atuin-x86_64-unknown-linux-musl.tar.gz"
 
@@ -49,7 +45,6 @@ github_apps:
     description: "A smarter cd command. Supports all major shells."
     repo: "ajeetdsouza/zoxide"
     version: 0.9.9
-    tag_v: true
     binary_name: "zoxide"
     binary_pattern: "zoxide-0.9.9-x86_64-unknown-linux-musl.tar.gz"
 
@@ -57,7 +52,6 @@ github_apps:
     description: "☄🌌️ The minimal, blazing-fast, and infinitely customizable prompt for any shell!"
     repo: "starship/starship"
     version: 1.24.2
-    tag_v: true
     binary_name: "starship"
     binary_pattern: "starship-x86_64-unknown-linux-musl.tar.gz"
 
@@ -65,7 +59,6 @@ github_apps:
     description: "A terminal file viewer"
     repo: "sxyazi/yazi"
     version: 26.1.22
-    tag_v: true
     binary_name: "yazi"
     binary_pattern: "yazi-x86_64-unknown-linux-musl.zip"
 
@@ -73,7 +66,6 @@ github_apps:
     description: "A terminal workspace with batteries included"
     repo: "zellij-org/zellij"
     version: 0.44.0
-    tag_v: true
     binary_name: "zellij"
     binary_pattern: "zellij-x86_64-unknown-linux-musl.tar.gz"
 
@@ -81,7 +73,6 @@ github_apps:
     description: "A cat(1) clone with wings."
     repo: "sharkdp/bat"
     version: 0.26.1
-    tag_v: true
     binary_name: "bat"
     binary_pattern: "bat-v__VERSION__-x86_64-unknown-linux-musl.tar.gz"
 
@@ -89,15 +80,13 @@ github_apps:
     description: "A cat(1) clone with wings."
     repo: "sharkdp/bat"
     version: 0.26.1
-    tag_v: true
     binary_name: "bat"
     binary_pattern: "bat-v__VERSION__-x86_64-unknown-linux-musl.tar.gz"
 
   - name: "fd"
     description: "A simple, fast and user-friendly alternative to 'find'"
     repo: "sharkdp/fd"
-    version: 10.4.0
-    tag_v: true
+    version: 10.4.2
     binary_name: "fd"
     binary_pattern: "fd-v__VERSION__-x86_64-unknown-linux-musl.tar.gz"
 
@@ -105,7 +94,6 @@ github_apps:
     description: "🌸 A command-line fuzzy finder"
     repo: "junegunn/fzf"
     version: 0.70.0
-    tag_v: true
     binary_name: "fzf"
     binary_pattern: "fzf-__VERSION__-linux_amd64.tar.gz"
 
@@ -113,7 +101,6 @@ github_apps:
     description: "A modern alternative to ls"
     repo: "eza-community/eza"
     version: 0.23.4
-    tag_v: true
     binary_name: "eza"
     binary_pattern: "eza_x86_64-unknown-linux-musl.tar.gz"
 
@@ -121,7 +108,7 @@ github_apps:
     description: "A fast grep replacement"
     repo: "BurntSushi/ripgrep"
     version: 15.1.0
-    tag_v: false
+    tag_prefix: ""
     binary_name: "rg"
     binary_pattern: "ripgrep-__VERSION__-x86_64-unknown-linux-musl.tar.gz"
 
@@ -129,22 +116,27 @@ github_apps:
     description: "A more intuitive version of du in rust"
     repo: "bootandy/dust"
     version: 1.2.4
-    tag_v: true
     binary_name: "dust"
     binary_pattern: "dust-v__VERSION__-x86_64-unknown-linux-musl.tar.gz"
+
+  - name: "jq"
+    description: "Command-line JSON processor"
+    repo: "jqlang/jq"
+    version: 1.8.1
+    tag_prefix: "jq-"
+    binary_name: "jq"
+    binary_pattern: "jq-linux-amd64"
 
   - name: "yq"
     description: "yq is a portable command-line YAML, JSON, XML, CSV, TOML, HCL and properties processor"
     repo: "mikefarah/yq"
     version: 4.52.5
-    tag_v: true
     binary_name: "yq"
-    binary_pattern: "yq_linux_amd64.tar.gz"
+    binary_pattern: "yq_linux_amd64"
 
   - name: "direnv"
     description: "unclutter your .profile"
     repo: "direnv/direnv"
     version: 2.37.1
-    tag_v: true
     binary_name: "direnv"
     binary_pattern: "direnv.linux-amd64"

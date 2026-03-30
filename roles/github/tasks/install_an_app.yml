@@ -2,11 +2,7 @@
   block:
     - name: "Prepare variables: {{ app.name }}"
       ansible.builtin.set_fact:
-        final_tag: >-
-          {{
-            (app.tag_v | default(true) | bool) |
-            ternary('v' + (app.version | string | regex_replace('^v', '')), (app.version | string | regex_replace('^v', '')))
-          }}
+        final_tag: "{{ (app.tag_prefix | default('v')) ~ (app.version | string | regex_replace('^v', '')) }}"
 
     - name: "Determine install strategy: {{ app.name }}"
       ansible.builtin.set_fact:
@@ -28,14 +24,14 @@
     - name: "Check if binary is installed and version matches: {{ app.name }}"
       when: install_strategy == 'binary'
       block:
-        - name: "Get current binary version"
+        - name: "Get current binary version: {{ app.name }}"
           ansible.builtin.shell: "{{ app.binary_name }} {{ app.version_arg | default('--version') }}"
           register: bin_v_result
           failed_when: false
           changed_when: false
           check_mode: false
 
-        - name: "Compare binary version"
+        - name: "Compare binary version: {{ app.name }}"
           ansible.builtin.set_fact:
             is_installed: >-
               {{
@@ -79,10 +75,10 @@
         - install_strategy == 'binary'
       block:
         - name: Determine if asset is an archive
-          ansible.built.set_fact:
-            is_archive: "{{ final_asset_name | regex_search('\\.(tar\\.gz|zip|tgz|bz2)$') }}"
+          ansible.builtin.set_fact:
+            is_archive: "{{ final_asset_name is regex('\\.(tar\\.gz|zip|tgz|bz2)$', ignorecase=True) }}"
 
-        - name: Plain binary
+        - name: "Plain binary: {{ app.name }}"
           when: not is_archive
           ansible.builtin.copy:
             src: "/tmp/{{ final_asset_name }}"
@@ -90,7 +86,7 @@
             mode: "0755"
             remote_src: true
 
-        - name: Archive binary
+        - name: "Archive binary: {{ app.name }}"
           when: is_archive
           block:
             - name: "Create a temporary directory for extraction"
@@ -99,7 +95,7 @@
                 state: directory
                 mode: "0755"
 
-            - name: "Unarchive binary"
+            - name: "Unarchive binary: {{ app.name }}"
               ansible.builtin.unarchive:
                 src: "/tmp/{{ final_asset_name }}"
                 dest: "/tmp/{{ app.name }}_extract"
@@ -107,14 +103,14 @@
                 list_files: true
               register: unarchive_result
 
-            - name: "Move binaries to /usr/local/bin"
+            - name: "Move binaries to /usr/local/bin: {{ app.name }}"
               ansible.builtin.shell: |
                 find "/tmp/{{ app.name }}_extract" -type f -name "{{ item }}" -exec cp -af {} /usr/local/bin/ \;
                 chmod +x "/usr/local/bin/{{ item }}"
               loop: "{{ app.binaries | default([app.binary_name]) }}"
               when: item is defined
 
-            - name: "Cleanup extraction directory"
+            - name: "Cleanup extraction directory: {{ app.name }}"
               ansible.builtin.file:
                 path: "/tmp/{{ app.name }}_extract"
                 state: absent
