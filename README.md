@@ -20,6 +20,10 @@
 #### 部署
 
 ```bash
+git clone https://github.com/thinkgos/dotfiles.git ~/.local/share/chezmoi
+
+cd ~/.local/share/chezmoi
+
 # 应用 dotfiles 配置
 mise run apply-minimal-dotfiles
 

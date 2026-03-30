@@ -36,8 +36,8 @@ mise run apply-dotfiles         # 通过 mise 任务应用full模式配置
 mise run apply-minimal-dotfiles # 通过 mise 任务应用minimal模式配置
 mise run use-starship           # 设置 starship 配置
 ansible-playbook site.yml -u <username> --tags system,github -K # 配置远程服务器（full模式）
-chezmoi init --apply thinkgos     # 远程机器(新机器)
-chezmoi git pull && chezmoi apply # 远程机器(已有配置机器)
+chezmoi init --apply thinkgos     # 远程机器(新机器-full模式)
+chezmoi git pull && chezmoi apply # 远程机器(已有配置机器-full模式)
 ```
 
 ## 代码风格与约定
