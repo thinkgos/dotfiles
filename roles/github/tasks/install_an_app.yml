@@ -49,7 +49,7 @@
         mode: "0644"
       register: download_result
 
-    - name: "Install on Debian/Ubuntu: {{ app.name }}"
+    - name: "Install on Debian (Ubuntu): {{ app.name }}"
       when:
         - not is_installed
         - ansible_facts['os_family'] == "Debian"

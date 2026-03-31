@@ -1,2 +1,4 @@
 [cors]
 cors.thinkgos.cn ansible_user=cors
+[kata]
+thinkgos.cn ansible_user=thinkgo
