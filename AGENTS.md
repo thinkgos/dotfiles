@@ -2,7 +2,7 @@
 
 ## 概览
 
-这是一个使用 [chezmoi](https://www.chezmoi.io/) 管理的**个人 dotfiles 仓库**。配置是版本控制和可复现的。项目使用 [mise](https://mise.jdx.dev/) 作为版本管理器来锁定工具版本。
+这是一个使用 [chezmoi](https://www.chezmoi.io/) 管理的**个人 dotfiles 仓库**。配置是版本控制和可复现的。项目使用 [mise](https://mise.jdx.dev/) 作为版本管理器来锁定工具版本。`ansible`管理系统包和github应用。
 
 ## 项目工作指引
 
