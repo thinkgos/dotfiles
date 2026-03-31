@@ -140,3 +140,11 @@ github_apps:
     version: 2.37.1
     binary_name: "direnv"
     binary_pattern: "direnv.linux-amd64"
+
+  - name: "uv"
+    description: "An extremely fast Python package installer and resolver, written in Rust."
+    repo: "astral-sh/uv"
+    version: 0.11.2
+    tag_prefix: ""
+    binary_name: "uv"
+    binary_pattern: "uv-x86_64-unknown-linux-musl.tar.gz"
