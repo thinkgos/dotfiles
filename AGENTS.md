@@ -4,7 +4,39 @@
 
 这是一个使用 [chezmoi](https://www.chezmoi.io/) 管理的**个人 dotfiles 仓库**。配置是版本控制和可复现的。项目使用 [mise](https://mise.jdx.dev/) 作为版本管理器来锁定工具版本。`ansible`管理系统包和github应用。
 
-## 项目工作指引
+## 架构概述
+
+### 项目结构
+
+```sh
+.
+├── assets                    # 静态资源目录
+│   └── starship              # Starship 主题资源
+├── dot_config                # 配置文件目录（映射到 ~/.config）
+│   ├── mise                  # Mise 版本管理器配置
+│   ├── zsh                   # Zsh 配置目录
+│   ├── zellij                # Zellij 终端复用器配置
+│   └── starship.toml         # Starship 提示符配置
+├── dot_vimrc                 # Vim 配置（映射到 ~/.vimrc）
+├── dot_zshenv                # Zsh 环境变量配置（映射到 ~/.zshenv）
+├── ISSUE.md                  # 已知问题记录
+├── minimal                   # 最小化环境配置
+│   └── mise.toml             # 最小化环境 Mise 版本锁定
+├── README.md                 # 项目说明
+├── renovate.json             # Renovate 依赖更新配置
+├── roles/                    # 用于外部工具安装的 Ansible roles
+│   ├── system/               # 系统包角色, 包含发行版特定变量
+│   │   ├── task/             # 系统包角色任务
+│   │   └── vars/             # 系统包角色变量
+│   └── github/               # GitHub应用角色，支持版本跟踪和包/二进制策略
+│       ├── task/             # GitHub应用角色任务
+│       └── vars/             # GitHub应用角色变量
+├── ansible.cfg               # Ansible 配置文件
+├── hosts                     # Ansible 主机清单
+└── site.yml                  # Ansible 主 Playbook
+```
+
+## 常用工作流指南
 
 ### 修改配置文件
 

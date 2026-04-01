@@ -65,7 +65,7 @@ ZSH_THEME="agnoster"
 HISTSIZE="10000"
 SAVEHIST="10000"
 HISTORY_IGNORE='(exit|clear|history|ls|rm *|pkill *)'
-HISTFILE="$HOME/.zsh_history"
+HISTFILE="$HOME/.config/zsh/.zsh_history"
 mkdir -p "$(dirname "$HISTFILE")"
 
 # Would you like to use another custom folder than $ZSH/custom?
@@ -129,15 +129,6 @@ for opt in "${set_opts[@]}"; do
 done
 unset opt set_opts
 
-eval "$(mise activate zsh)"
-eval "$(carapace _carapace zsh)"
-eval "$(zoxide init zsh)"
-eval "$(atuin init zsh --disable-up-arrow)"
-eval "$(starship init zsh)"
-eval "$(direnv hook zsh)"
-
-source <(fzf --zsh)
-
 autoload -U +X bashcompinit && bashcompinit
 if [[ "$TERM" == "xterm-kitty" ]] && ! infocmp "$TERM" >/dev/null 2>&1; then 
   export TERM=xterm-256color 
@@ -154,6 +145,27 @@ function yy() {
   fi
   rm -f -- "$tmp"
 }
+
+smart_cache_eval() {
+  local name=$1
+  local cmd=$2
+  local binary=$(whence -p $name)
+  local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zinit"
+  local cache_file="${cache_dir}/eval_${name}.zsh"
+
+  # 确保缓存目录存在
+ [[ -d "$cache_dir" ]] || mkdir -p "$cache_dir"
+
+  # 如果缓存文件不存在，或者二进制文件比缓存文件新，则重建
+  if [[ ! -f "$cache_file" || ("$binary" -nt "$cache_file" ) ]]; then
+      eval "$cmd" >| "$cache_file"
+      zcompile "$cache_file"
+  fi
+  source "$cache_file"
+}
+
+smart_cache_eval "mise" "mise activate zsh"
+smart_cache_eval "direnv" "direnv hook zsh"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -179,9 +191,21 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 # zsh plugin via zinit
-zinit ice wait"0" lucid atload"_zsh_autosuggest_start"
+zinit ice wait"0" lucid
 zinit light zsh-users/zsh-autosuggestions
 
-zinit ice wait"0" lucid
+zinit ice wait"0" lucid blockf atload"zpcdreplay"
 zinit light zdharma-continuum/fast-syntax-highlighting
 
+zinit ice wait"0" lucid atload'
+    smart_cache_eval "starship" "starship init zsh"
+    smart_cache_eval "zoxide"   "zoxide init zsh"
+'
+zinit light zdharma-continuum/null
+
+zinit ice wait"1" lucid atload'
+    smart_cache_eval "fzf"      "fzf --zsh"
+    smart_cache_eval "atuin"    "atuin init zsh --disable-up-arrow"
+    smart_cache_eval "carapace" "carapace _carapace zsh"
+'
+zinit light zdharma-continuum/null
