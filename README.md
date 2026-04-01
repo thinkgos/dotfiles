@@ -11,7 +11,6 @@
 在部署前, 确保系统已安装以下基础依赖：
 
 - [mise](https://mise.jdx.dev/)
-- [oh-my-zsh](https://ohmyz.sh/)
 - `tmux 3.3+`: `apt install tmux`
 - `zsh 5.9+`: `apt install zsh`
 
@@ -34,8 +33,6 @@ mise run use-starship
 ### full模式
 
 在部署前, 确保系统已安装以下基础依赖：
-
-- [oh-my-zsh](https://ohmyz.sh/)
 
 > 💡 **提示**: 本地机器需要安装[ansible](https://www.ansible.com), 远程机器只需要支持`python3.x`即可.
 
