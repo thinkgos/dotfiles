@@ -195,10 +195,10 @@ zinit light-mode for \
 zinit ice wait"0" lucid
 zinit light zsh-users/zsh-autosuggestions
 
-zinit ice wait"0.2" lucid blockf atload"zpcdreplay"
+zinit ice wait"1" lucid blockf atload"zpcdreplay"
 zinit light zdharma-continuum/fast-syntax-highlighting
 
-zinit ice wait"0.5" lucid atload'
+zinit ice wait"1" lucid atload'
     smart_cache_eval "zoxide"   "zoxide init zsh"
     smart_cache_eval "fzf"      "fzf --zsh"
     smart_cache_eval "atuin"    "atuin init zsh --disable-up-arrow"
