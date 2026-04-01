@@ -156,10 +156,10 @@ smart_cache_eval() {
   local cache_file="${cache_dir}/eval_${name}.zsh"
 
   # 确保缓存目录存在
- [[ -d "$cache_dir" ]] || mkdir -p "$cache_dir"
+  [[ -d "$cache_dir" ]] || mkdir -p "$cache_dir"
 
   # 如果缓存文件不存在，或者二进制文件比缓存文件新，则重建
-  if [[ ! -f "$cache_file" || ("$binary" -nt "$cache_file" ) ]]; then
+  if [[ ! -f "$cache_file" || ! -f "{$cache_file}.zwc" || ("$binary" -nt "$cache_file" ) ]]; then
       eval "$cmd" >| "$cache_file"
       zcompile "$cache_file"
   fi
