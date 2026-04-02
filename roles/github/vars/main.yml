@@ -23,7 +23,7 @@ github_apps:
   - name: "mise"
     description: "dev tools, env vars, task runner"
     repo: "jdx/mise"
-    version: 2026.3.17
+    version: 2026.4.0
     binary_name: "mise"
     binary_pattern: "mise-v__VERSION__-linux-x64-musl.tar.xz"
 
@@ -72,7 +72,7 @@ github_apps:
   - name: "bat"
     description: "A cat(1) clone with wings."
     repo: "sharkdp/bat"
-    version: 0.26.1
+    version: 0.26.0
     binary_name: "bat"
     binary_pattern: "bat-v__VERSION__-x86_64-unknown-linux-musl.tar.gz"
 
