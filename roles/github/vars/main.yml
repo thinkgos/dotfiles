@@ -23,7 +23,7 @@ github_apps:
   - name: "mise"
     description: "dev tools, env vars, task runner"
     repo: "jdx/mise"
-    version: 2026.4.4
+    version: 2026.4.5
     binary_name: "mise"
     binary_pattern: "mise-v__VERSION__-linux-x64-musl.tar.xz"
 
