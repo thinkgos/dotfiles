@@ -1,5 +1,5 @@
 [tools]
-"github:twpayne/chezmoi" = { version = "2.70.0", platforms = { linux-x64 = { asset_pattern = "chezmoi_{version}_linux-musl_amd64.tar.gz" } } }
+"github:twpayne/chezmoi" = { version = "2.70.1", platforms = { linux-x64 = { asset_pattern = "chezmoi_{version}_linux-musl_amd64.tar.gz" } } }
 
 [tasks.apply-dotfiles]
 run = "chezmoi apply -S ."
