@@ -16,7 +16,7 @@ github_apps:
   - name: "chezmoi"
     description: "Manage your dotfiles across multiple diverse machines, securely."
     repo: "twpayne/chezmoi"
-    version: 2.70.1
+    version: 2.70.2
     binary_name: "chezmoi"
     binary_pattern: "chezmoi___VERSION___linux-musl_amd64.tar.gz"
 
