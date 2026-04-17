@@ -130,7 +130,7 @@ github_apps:
   - name: "yq"
     description: "yq is a portable command-line YAML, JSON, XML, CSV, TOML, HCL and properties processor"
     repo: "mikefarah/yq"
-    version: 4.52.5
+    version: 4.53.2
     binary_name: "yq"
     binary_pattern: "yq_linux_amd64"
 
