@@ -51,7 +51,7 @@ github_apps:
   - name: "starship"
     description: "☄🌌️ The minimal, blazing-fast, and infinitely customizable prompt for any shell!"
     repo: "starship/starship"
-    version: 1.24.2
+    version: 1.25.0
     binary_name: "starship"
     binary_pattern: "starship-x86_64-unknown-linux-musl.tar.gz"
 
