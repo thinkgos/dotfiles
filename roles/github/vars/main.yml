@@ -37,7 +37,7 @@ github_apps:
   - name: "atuin"
     description: "✨ Making your shell magical"
     repo: "atuinsh/atuin"
-    version: 18.15.2
+    version: 18.16.0
     binary_name: "atuin"
     binary_pattern: "atuin-x86_64-unknown-linux-musl.tar.gz"
 
