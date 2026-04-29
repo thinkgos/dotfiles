@@ -25,7 +25,7 @@ github_apps:
     repo: "jdx/mise"
     version: 2026.4.25
     binary_name: "mise"
-    binary_pattern: "mise-v__VERSION__-linux-x64-musl.tar.xz"
+    binary_pattern: "mise-v__VERSION__-linux-x64-musl.tar.gz"
 
   - name: "carapace"
     description: "A multi-shell completion binary"
