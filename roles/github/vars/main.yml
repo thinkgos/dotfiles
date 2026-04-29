@@ -30,7 +30,7 @@ github_apps:
   - name: "carapace"
     description: "A multi-shell completion binary"
     repo: "carapace-sh/carapace-bin"
-    version: 1.6.4
+    version: 1.6.5
     binary_name: "carapace"
     binary_pattern: "carapace-bin___VERSION___linux_amd64.tar.gz"
 
