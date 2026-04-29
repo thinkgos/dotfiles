@@ -64,11 +64,11 @@ smart_cache_eval() {
   source "$cache_file"
 }
 
-eval "$(sheldon source)"
-
 # 环境 管理
 smart_cache_eval "mise" "mise activate --quiet --silent zsh"
 # smart_cache_eval "direnv"   "direnv hook zsh"
+
+eval "$(sheldon source)"
 
 # 效率工具
 smart_cache_eval "zoxide" "zoxide init zsh"
