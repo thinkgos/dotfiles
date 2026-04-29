@@ -1,6 +1,6 @@
 [tools]
 carapace = "1.6"
-atuin = "18.13.6"
+atuin = "18.16.0"
 zoxide = "0.9.9"
 starship = "1.24.2"
 yazi = "26.1.22"
