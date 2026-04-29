@@ -14,7 +14,7 @@ alias -- ls=eza
 alias -- mkdir='mkdir -p'
 alias -- mv='mv -i'
 alias -- nv=nvim
-alias -- trash='trash -v'
+alias -- rm-trash='trash -v'
 
 # Set shell options
 set_opts=(
@@ -50,7 +50,7 @@ smart_cache_eval() {
   local name=$1
   local cmd=$2
   local binary=$(whence -p $name)
-  local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zinit"
+  local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
   local cache_file="${cache_dir}/eval_${name}.zsh"
 
   # 确保缓存目录存在
@@ -64,54 +64,19 @@ smart_cache_eval() {
   source "$cache_file"
 }
 
-smart_cache_eval "mise"     "mise activate zsh"
+eval "$(sheldon source)"
+
+# 环境 管理
+#smart_cache_eval "mise"     "mise activate --quiet --silent zsh"
 smart_cache_eval "direnv"   "direnv hook zsh"
-smart_cache_eval "starship" "starship init zsh"
+
+# 效率工具
 smart_cache_eval "zoxide"   "zoxide init zsh"
 smart_cache_eval "atuin"    "atuin init zsh --disable-up-arrow"
+smart_cache_eval "fzf"      "fzf --zsh"
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
-fi
+# 补全系统
+#smart_cache_eval "carapace" "carapace _carapace zsh"
 
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
-
-### End of Zinit's installer chunk
-
-# zsh plugin via zinit
-zinit ice wait"0" lucid atload"_zsh_autosuggest_start"
-zinit light zsh-users/zsh-autosuggestions
-
-zinit ice wait"1" lucid blockf atload"zpcdreplay"
-zinit light zdharma-continuum/fast-syntax-highlighting
-
-zinit ice wait"1" lucid atload'
-    smart_cache_eval "fzf"      "fzf --zsh"
-    smart_cache_eval "carapace" "carapace _carapace zsh"
-'
-zinit light zdharma-continuum/null
-
-# load ohmyzsh via zinit
-zinit snippet OMZ::lib/completion.zsh
-zinit snippet OMZ::lib/key-bindings.zsh
-zinit snippet OMZ::lib/history.zsh
-zinit snippet OMZ::lib/git.zsh
-zinit snippet OMZ::plugins/git
-zinit snippet OMZ::plugins/cp
-zinit snippet OMZ::plugins/tmux
-zinit snippet OMZ::plugins/extract
+# latest
+smart_cache_eval "starship" "starship init zsh"
