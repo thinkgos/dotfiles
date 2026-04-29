@@ -8,7 +8,7 @@ mkdir -p "$(dirname "$HISTFILE")"
 # User configuration
 
 # Set aliases
-alias -- cat='bat -p' 
+alias -- cat='bat -p'
 alias -- cp='cp -i'
 alias -- ls=eza
 alias -- mkdir='mkdir -p'
@@ -30,11 +30,11 @@ unset opt set_opts
 autoload -U +X bashcompinit && bashcompinit
 autoload -Uz compinit
 compinit
-if [[ "$TERM" == "xterm-kitty" ]] && ! infocmp "$TERM" >/dev/null 2>&1; then 
-  export TERM=xterm-256color 
+if [[ "$TERM" == "xterm-kitty" ]] && ! infocmp "$TERM" >/dev/null 2>&1; then
+  export TERM=xterm-256color
 fi
-if [[ "$TERM" == "xterm-ghostty" ]] && ! infocmp "$TERM" >/dev/null 2>&1; then 
-  export TERM=xterm-256color 
+if [[ "$TERM" == "xterm-ghostty" ]] && ! infocmp "$TERM" >/dev/null 2>&1; then
+  export TERM=xterm-256color
 fi
 
 function yy() {
@@ -57,9 +57,9 @@ smart_cache_eval() {
   [[ -d "$cache_dir" ]] || mkdir -p "$cache_dir"
 
   # 如果缓存文件不存在，或者二进制文件比缓存文件新，则重建
-  if [[ ! -f "$cache_file" || ! -f "{$cache_file}.zwc" || ("$binary" -nt "$cache_file" ) ]]; then
-      eval "$cmd" >| "$cache_file"
-      zcompile "$cache_file"
+  if [[ ! -f "$cache_file" || ! -f "{$cache_file}.zwc" || ("$binary" -nt "$cache_file") ]]; then
+    eval "$cmd" >|"$cache_file"
+    zcompile "$cache_file"
   fi
   source "$cache_file"
 }
@@ -67,16 +67,16 @@ smart_cache_eval() {
 eval "$(sheldon source)"
 
 # 环境 管理
-#smart_cache_eval "mise"     "mise activate --quiet --silent zsh"
-smart_cache_eval "direnv"   "direnv hook zsh"
+smart_cache_eval "mise" "mise activate --quiet --silent zsh"
+# smart_cache_eval "direnv"   "direnv hook zsh"
 
 # 效率工具
-smart_cache_eval "zoxide"   "zoxide init zsh"
-smart_cache_eval "atuin"    "atuin init zsh --disable-up-arrow"
-smart_cache_eval "fzf"      "fzf --zsh"
+smart_cache_eval "zoxide" "zoxide init zsh"
+smart_cache_eval "atuin" "atuin init zsh --disable-up-arrow"
+smart_cache_eval "fzf" "fzf --zsh"
 
 # 补全系统
-#smart_cache_eval "carapace" "carapace _carapace zsh"
+# smart_cache_eval "carapace" "carapace _carapace zsh"
 
 # latest
 smart_cache_eval "starship" "starship init zsh"
