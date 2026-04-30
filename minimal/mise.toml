@@ -2,7 +2,7 @@
 carapace = "1.6"
 atuin = "18.13.6"
 zoxide = "0.9.9"
-starship = "1.24.2"
+starship = "1.25.1"
 yazi = "26.1.22"
 zellij = "0.44.0"
 direnv = "2.37.1"
