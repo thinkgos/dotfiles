@@ -144,7 +144,7 @@ github_apps:
   - name: "uv"
     description: "An extremely fast Python package installer and resolver, written in Rust."
     repo: "astral-sh/uv"
-    version: 0.11.8
+    version: 0.11.9
     tag_prefix: ""
     binary_name: "uv"
     binary_pattern: "uv-x86_64-unknown-linux-musl.tar.gz"
