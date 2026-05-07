@@ -66,17 +66,7 @@ smart_cache_eval() {
 
 # 环境 管理
 smart_cache_eval "mise" "mise activate --quiet --silent zsh"
-# smart_cache_eval "direnv"   "direnv hook zsh"
-
-eval "$(sheldon source)"
-
 # 效率工具
 smart_cache_eval "zoxide" "zoxide init zsh"
-smart_cache_eval "atuin" "atuin init zsh --disable-up-arrow"
 smart_cache_eval "fzf" "fzf --zsh"
-
-# 补全系统
-# smart_cache_eval "carapace" "carapace _carapace zsh"
-
-# latest
 smart_cache_eval "starship" "starship init zsh"

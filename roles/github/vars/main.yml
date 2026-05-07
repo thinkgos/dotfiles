@@ -27,20 +27,6 @@ github_apps:
     binary_name: "mise"
     binary_pattern: "mise-v__VERSION__-linux-x64-musl.tar.gz"
 
-  - name: "carapace"
-    description: "A multi-shell completion binary"
-    repo: "carapace-sh/carapace-bin"
-    version: 1.6.4
-    binary_name: "carapace"
-    binary_pattern: "carapace-bin___VERSION___linux_amd64.tar.gz"
-
-  - name: "atuin"
-    description: "✨ Making your shell magical"
-    repo: "atuinsh/atuin"
-    version: 18.16.0
-    binary_name: "atuin"
-    binary_pattern: "atuin-x86_64-unknown-linux-musl.tar.gz"
-
   - name: "zoxide"
     description: "A smarter cd command. Supports all major shells."
     repo: "ajeetdsouza/zoxide"
@@ -68,13 +54,6 @@ github_apps:
     version: 0.44.1
     binary_name: "zellij"
     binary_pattern: "zellij-x86_64-unknown-linux-musl.tar.gz"
-
-  - name: "bat"
-    description: "A cat(1) clone with wings."
-    repo: "sharkdp/bat"
-    version: 0.26.1
-    binary_name: "bat"
-    binary_pattern: "bat-v__VERSION__-x86_64-unknown-linux-musl.tar.gz"
 
   - name: "bat"
     description: "A cat(1) clone with wings."
@@ -112,13 +91,6 @@ github_apps:
     binary_name: "rg"
     binary_pattern: "ripgrep-__VERSION__-x86_64-unknown-linux-musl.tar.gz"
 
-  - name: "dust"
-    description: "A more intuitive version of du in rust"
-    repo: "bootandy/dust"
-    version: 1.2.4
-    binary_name: "dust"
-    binary_pattern: "dust-v__VERSION__-x86_64-unknown-linux-musl.tar.gz"
-
   - name: "jq"
     description: "Command-line JSON processor"
     repo: "jqlang/jq"
@@ -134,13 +106,6 @@ github_apps:
     binary_name: "yq"
     binary_pattern: "yq_linux_amd64"
 
-  - name: "direnv"
-    description: "unclutter your .profile"
-    repo: "direnv/direnv"
-    version: 2.37.1
-    binary_name: "direnv"
-    binary_pattern: "direnv.linux-amd64"
-
   - name: "uv"
     description: "An extremely fast Python package installer and resolver, written in Rust."
     repo: "astral-sh/uv"
@@ -148,11 +113,3 @@ github_apps:
     tag_prefix: ""
     binary_name: "uv"
     binary_pattern: "uv-x86_64-unknown-linux-musl.tar.gz"
-
-  - name: "sheldon"
-    description: ":bowtie: Fast, configurable, shell plugin manager"
-    repo: "rossmacarthur/sheldon"
-    version: 0.8.5
-    tag_prefix: ""
-    binary_name: "sheldon"
-    binary_pattern: "sheldon-__VERSION__-x86_64-unknown-linux-musl.tar.gz"

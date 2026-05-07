@@ -65,7 +65,7 @@ sudo chsh -s /usr/bin/zsh $USER
 ## 🐛 已知问题
 
 - **Ubuntu 25.10+ Ansible sudo 任务失败**: 因 `sudo-rs` 不兼容导致, 详见 [ISSUE.md](ISSUE.md) 解决方案
-- **zs 5.9+**: 旧版本系统需要先升级 zsh
+- **zsh 5.9+**: 旧版本系统需要先升级 zsh
 
 ---
 

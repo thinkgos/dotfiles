@@ -1,18 +1,12 @@
 [tools]
-carapace = "1.6"
-atuin = "18.13.6"
 zoxide = "0.9.9"
 starship = "1.24.2"
 yazi = "26.1.22"
 zellij = "0.44.0"
-direnv = "2.37.1"
 bat = "0.26.1"
 fzf = "0.70.0"
 eza = "0.23.4"
 ripgrep = "15.1.0"
 fd = "10.4.2"
-dust = "1.2.4"
 jq = "1.8.1"
 yq = "4.53.2"
-gitui = "0.28.1"
-"github:rossmacarthur/sheldon" = { version = "0.8.5", platforms = { linux-x64 = { asset_pattern = "sheldon-{{version}}-x86_64-unknown-linux-musl.tar.gz" } } }
