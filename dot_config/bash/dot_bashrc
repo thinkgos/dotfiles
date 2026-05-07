@@ -1,0 +1,65 @@
+export BAT_PAGER="less -r"
+export EDITOR="vim"
+export FZF_ALT_C_OPTS="--walker-skip .git,node_modules,target --preview 'tree -C -L 3 {}'"
+export FZF_DEFAULT_COMMAND="fd --hidden"
+
+# Set history options
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+export HISTIGNORE='exit:clear:history:ls:rm *:pkill *'
+
+# Set aliases
+alias cat='bat -p'
+alias cp='cp -i'
+alias ls='eza'
+alias mkdir='mkdir -p'
+alias mv='mv -i'
+alias nv='nvim'
+alias rm-trash='trash -v'
+
+# Set shell options
+# 开启 autocd
+shopt -s autocd 2>/dev/null
+# 实时追加历史记录
+shopt -s histappend
+# 检查窗口大小
+shopt -s checkwinsize
+
+if [[ "$TERM" == "xterm-kitty" ]] && ! infocmp "$TERM" >/dev/null 2>&1; then
+    export TERM=xterm-256color
+fi
+if [[ "$TERM" == "xterm-ghostty" ]] && ! infocmp "$TERM" >/dev/null 2>&1; then
+    export TERM=xterm-256color
+fi
+
+# yazi 文件管理器
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+    command yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
+
+smart_cache_eval() {
+    local name=$1
+    local cmd=$2
+    local binary=$(type -p "$name")
+    local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/bash"
+    local cache_file="${cache_dir}/eval_${name}.sh"
+
+    [[ -z "$binary" ]] && return
+    [[ -d "$cache_dir" ]] || mkdir -p "$cache_dir"
+
+    # 直接检查文件新旧
+    if [[ ! -f "$cache_file" || ("$binary" -nt "$cache_file") ]]; then
+        eval "$cmd" >|"$cache_file"
+    fi
+    source "$cache_file"
+}
+
+# 效率工具
+smart_cache_eval "zoxide" "zoxide init bash"
+smart_cache_eval "fzf" "fzf --bash"
+smart_cache_eval "starship" "starship init bash"

@@ -5,8 +5,6 @@ HISTORY_IGNORE='(exit|clear|history|ls|rm *|pkill *)'
 HISTFILE="$HOME/.config/zsh/.zsh_history"
 mkdir -p "$(dirname "$HISTFILE")"
 
-# User configuration
-
 # Set aliases
 alias -- cat='bat -p'
 alias -- cp='cp -i'
@@ -37,7 +35,8 @@ if [[ "$TERM" == "xterm-ghostty" ]] && ! infocmp "$TERM" >/dev/null 2>&1; then
   export TERM=xterm-256color
 fi
 
-function yy() {
+# yazi 文件管理器
+function y() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
   command yazi "$@" --cwd-file="$tmp"
   if cwd="$(<"$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
