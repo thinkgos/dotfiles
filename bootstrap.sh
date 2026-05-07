@@ -14,26 +14,33 @@ UA="bootstrap.sh/1.0"
 
 # ---------- logging ----------
 
-info()  { printf "\033[0;32m[info]\033[0m  %s\n" "$*"; }
-warn()  { printf "\033[0;33m[warn]\033[0m  %s\n" "$*"; }
+info() { printf "\033[0;32m[info]\033[0m  %s\n" "$*"; }
+warn() { printf "\033[0;33m[warn]\033[0m  %s\n" "$*"; }
 error() { printf "\033[0;31m[error]\033[0m %s\n" "$*" >&2; }
-die()   { error "$@"; exit 1; }
+die() {
+    error "$@"
+    exit 1
+}
 
 # ---------- network ----------
 
 dl() {
+    local max_retries=3
+
     if command -v curl &>/dev/null; then
-        curl -fSL --retry 3 --retry-delay 2 -H "User-Agent: $UA" "$1"
+        curl --proto '=https' --tlsv1.2 -fSL --retry $max_retries --retry-delay 2 -H "User-Agent: $UA" "$1"
     elif command -v wget &>/dev/null; then
-        wget -qO- --header="User-Agent: $UA" "$1"
+        wget -qO- --tries=$max_retries --header="User-Agent: $UA" "$1"
     else
         die "Neither curl nor wget found"
     fi
 }
 
 dl_to_file() {
+    local max_retries=3
+
     if command -v curl &>/dev/null; then
-        curl -fSL --retry 3 --retry-delay 2 -H "User-Agent: $UA" -o "$2" "$1"
+        curl --proto '=https' --tlsv1.2 -fSL --retry $max_retries --retry-delay 2 -H "User-Agent: $UA" -o "$2" "$1"
     else
         wget -qO "$2" --header="User-Agent: $UA" "$1"
     fi
@@ -150,9 +157,9 @@ install_app() {
         mkdir -p "$extract_dir"
 
         case "$asset" in
-            *.tar.gz|*.tgz) tar -xzf "$tmpdir/$asset" -C "$extract_dir" ;;
-            *.tar.bz2)       tar -xjf "$tmpdir/$asset" -C "$extract_dir" ;;
-            *.zip)           unzip -qo "$tmpdir/$asset" -d "$extract_dir" ;;
+        *.tar.gz | *.tgz) tar -xzf "$tmpdir/$asset" -C "$extract_dir" ;;
+        *.tar.bz2) tar -xjf "$tmpdir/$asset" -C "$extract_dir" ;;
+        *.zip) unzip -qo "$tmpdir/$asset" -d "$extract_dir" ;;
         esac
 
         local found
@@ -183,22 +190,28 @@ install_app() {
 main() {
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            -f|--file)  YAML_FILE="$2"; shift 2 ;;
-            -d|--dir)   INSTALL_DIR="$2"; shift 2 ;;
-            -h|--help)
-                echo "Usage: $0 [-f yaml_file] [-d install_dir]"
-                echo "  -f, --file   YAML file (default: roles/github/vars/main.yml)"
-                echo "  -d, --dir    Install directory (default: /usr/local/bin)"
-                exit 0
-                ;;
-            *) die "Unknown option: $1" ;;
+        -f | --file)
+            YAML_FILE="$2"
+            shift 2
+            ;;
+        -d | --dir)
+            INSTALL_DIR="$2"
+            shift 2
+            ;;
+        -h | --help)
+            echo "Usage: $0 [-f yaml_file] [-d install_dir]"
+            echo "  -f, --file   YAML file (default: roles/github/vars/main.yml)"
+            echo "  -d, --dir    Install directory (default: /usr/local/bin)"
+            exit 0
+            ;;
+        *) die "Unknown option: $1" ;;
         esac
     done
 
     [[ -f "$YAML_FILE" ]] || die "YAML file not found: $YAML_FILE"
-    [[ $EUID -ne 0 ]]    && die "This script must be run as root (or with sudo)"
-    command -v curl &>/dev/null || command -v wget &>/dev/null \
-        || die "curl or wget is required"
+    [[ $EUID -ne 0 ]] && die "This script must be run as root (or with sudo)"
+    command -v curl &>/dev/null || command -v wget &>/dev/null ||
+        die "curl or wget is required"
 
     mkdir -p "$INSTALL_DIR"
 
@@ -216,13 +229,21 @@ main() {
         local val="${line#*: }"
 
         case "$key" in
-            _name)          [[ -n "$_name" ]] && { install_app "$_name" "$_repo" "$_version" "$_tag_prefix" "$_binary_name" "$_binary_pattern" "$_version_arg"; count=$((count + 1)); _tag_prefix="v"; _version_arg="--version"; }; _name="$val" ;;
-            _repo)          _repo="$val" ;;
-            _version)       _version="$val" ;;
-            _tag_prefix)    _tag_prefix="$val" ;;
-            _binary_name)   _binary_name="$val" ;;
-            _binary_pattern) _binary_pattern="$val" ;;
-            _version_arg)   _version_arg="$val" ;;
+        _name)
+            [[ -n "$_name" ]] && {
+                install_app "$_name" "$_repo" "$_version" "$_tag_prefix" "$_binary_name" "$_binary_pattern" "$_version_arg"
+                count=$((count + 1))
+                _tag_prefix="v"
+                _version_arg="--version"
+            }
+            _name="$val"
+            ;;
+        _repo) _repo="$val" ;;
+        _version) _version="$val" ;;
+        _tag_prefix) _tag_prefix="$val" ;;
+        _binary_name) _binary_name="$val" ;;
+        _binary_pattern) _binary_pattern="$val" ;;
+        _version_arg) _version_arg="$val" ;;
         esac
     done < <(parse_yaml_apps)
 
