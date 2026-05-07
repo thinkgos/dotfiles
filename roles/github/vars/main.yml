@@ -20,13 +20,6 @@ github_apps:
     binary_name: "chezmoi"
     binary_pattern: "chezmoi___VERSION___linux-musl_amd64.tar.gz"
 
-  - name: "mise"
-    description: "dev tools, env vars, task runner"
-    repo: "jdx/mise"
-    version: 2026.4.25
-    binary_name: "mise"
-    binary_pattern: "mise-v__VERSION__-linux-x64-musl.tar.gz"
-
   - name: "zoxide"
     description: "A smarter cd command. Supports all major shells."
     repo: "ajeetdsouza/zoxide"
