@@ -9,13 +9,13 @@ export HISTFILESIZE=10000
 export HISTIGNORE='exit:clear:history:ls:rm *:pkill *'
 
 # Set aliases
-alias cat='bat -p'
-alias cp='cp -i'
-alias ls='eza'
-alias mkdir='mkdir -p'
-alias mv='mv -i'
-alias nv='nvim'
-alias rm-trash='trash -v'
+# alias cat='bat -p'
+# alias cp='cp -i'
+# alias ls='eza'
+# alias mkdir='mkdir -p'
+# alias mv='mv -i'
+# alias nv='nvim'
+# alias rm-trash='trash -v'
 
 # Set shell options
 # 开启 autocd
