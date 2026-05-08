@@ -63,3 +63,6 @@ smart_cache_eval() {
 smart_cache_eval "zoxide" "zoxide init bash"
 smart_cache_eval "fzf" "fzf --bash"
 smart_cache_eval "starship" "starship init bash"
+
+# Auto-Warpify
+[[ "$-" == *i* ]] && printf 'P$f{"hook": "SourcedRcFileForWarp", "value": { "shell": "zsh", "uname": "Linux" }}œ' 
