@@ -9,13 +9,9 @@
 ### 项目结构
 
 ```sh
-.
-├── assets                    # 静态资源目录
-│   └── starship              # Starship 主题资源
 ├── dot_config                # 配置文件目录（映射到 ~/.config）
 │   ├── zsh                   # Zsh 配置目录
-│   ├── zellij                # Zellij 终端复用器配置
-│   └── starship.toml         # Starship 提示符配置
+│   └── zellij                # Zellij 终端复用器配置
 ├── dot_vimrc                 # Vim 配置（映射到 ~/.vimrc）
 ├── dot_zshenv                # Zsh 环境变量配置（映射到 ~/.zshenv）
 ├── ISSUE.md                  # 已知问题记录
@@ -46,7 +42,6 @@
 
 - **Zsh 配置**: `source ~/.zshrc` (检查错误)
 - **Vim 配置**: 打开 vim，运行 `:source ~/.vimrc`
-- **Starship**: 在任何目录运行 `starship prompt`
 - **chezmoi**: `chezmoi diff` 和 `chezmoi apply --dry-run`
 
 ### 常用命令
@@ -70,7 +65,6 @@ chezmoi git pull && chezmoi apply # 远程机器(已有配置机器-full模式)
 ## 特别注意事项
 
 - **Ubuntu 25.10+ 兼容性**: Ansible sudo 任务可能因 `sudo-rs` 不兼容而失败。见 ISSUE.md。
-- **自定义主题**: `assets/starship/` 中的 starship 主题可以复制到 `dot_config/starship.toml`。
 
 ## 提交指南
 

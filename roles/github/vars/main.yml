@@ -27,13 +27,6 @@ github_apps:
     binary_name: "zoxide"
     binary_pattern: "zoxide-0.9.9-x86_64-unknown-linux-musl.tar.gz"
 
-  - name: "starship"
-    description: "☄🌌️ The minimal, blazing-fast, and infinitely customizable prompt for any shell!"
-    repo: "starship/starship"
-    version: 1.25.1
-    binary_name: "starship"
-    binary_pattern: "starship-x86_64-unknown-linux-musl.tar.gz"
-
   - name: "yazi"
     description: "A terminal file viewer"
     repo: "sxyazi/yazi"
