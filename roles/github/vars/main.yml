@@ -58,7 +58,7 @@ github_apps:
   - name: "fzf"
     description: "🌸 A command-line fuzzy finder"
     repo: "junegunn/fzf"
-    version: 0.73.1
+    version: 0.74.4
     binary_name: "fzf"
     binary_pattern: "fzf-__VERSION__-linux_amd64.tar.gz"
 
