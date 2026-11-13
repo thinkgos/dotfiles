@@ -23,7 +23,7 @@ github_apps:
   - name: "zoxide"
     description: "A smarter cd command. Supports all major shells."
     repo: "ajeetdsouza/zoxide"
-    version: 0.9.9
+    version: 0.10.0
     binary_name: "zoxide"
     binary_pattern: "zoxide-0.9.9-x86_64-unknown-linux-musl.tar.gz"
 
