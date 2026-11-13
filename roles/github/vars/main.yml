@@ -72,7 +72,7 @@ github_apps:
   - name: "ripgrep"
     description: "A fast grep replacement"
     repo: "BurntSushi/ripgrep"
-    version: 15.1.0
+    version: 15.2.0
     tag_prefix: ""
     binary_name: "rg"
     binary_pattern: "ripgrep-__VERSION__-x86_64-unknown-linux-musl.tar.gz"
