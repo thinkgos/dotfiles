@@ -15,7 +15,7 @@
     }
   ],
   "platformAutomerge": false,
-   "rebaseWhen": "behind-base-branch",
+  "ignoreTests": true,
   "packageRules": [
     {
       "matchDatasources": [
