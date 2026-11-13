@@ -51,7 +51,7 @@ github_apps:
   - name: "fd"
     description: "A simple, fast and user-friendly alternative to 'find'"
     repo: "sharkdp/fd"
-    version: 10.4.2
+    version: 10.5.2
     binary_name: "fd"
     binary_pattern: "fd-v__VERSION__-x86_64-unknown-linux-musl.tar.gz"
 
