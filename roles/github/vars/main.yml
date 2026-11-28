@@ -44,7 +44,7 @@ github_apps:
   - name: "bat"
     description: "A cat(1) clone with wings."
     repo: "sharkdp/bat"
-    version: 0.26.1
+    version: 0.27.0
     binary_name: "bat"
     binary_pattern: "bat-v__VERSION__-x86_64-unknown-linux-musl.tar.gz"
 
